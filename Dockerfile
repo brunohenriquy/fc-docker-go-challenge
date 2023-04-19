@@ -1,4 +1,4 @@
-FROM golang:bullseye as base
+FROM golang:alpine as base
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ RUN go env -w GO111MODULE=off
 
 RUN go build -o /fc-docker-go-challenge .
 
-FROM gcr.io/distroless/static-debian11
+FROM scratch
 
 COPY --from=base /fc-docker-go-challenge .
 
